@@ -38,32 +38,35 @@
       <audio id="explosion-sound" src="audio/bakuhatsu.mp3" preload="auto"></audio>
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false" far="10000"></a-camera>
 
+    <a-image id="got-fixed" src="#got-image" width="1.2" height="1.2" 
+      visible="false" opacity="0" look-at="[camera]">
+    </a-image>
     <!-- 各ターゲットと got 画像 -->
     <a-entity mindar-image-target="targetIndex: 0" id="target-0">
       <a-image src="#sasikae" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-0" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-0" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 1" id="target-1">
       <a-image src="#1k" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-1" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-1" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 2" id="target-2">
       <a-image src="#2k" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-2" src="#got-image1" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-2" src="#got-image1" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 3" id="target-3">
       <a-image src="#3k" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-3" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-3" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 4" id="target-4">
       <a-image src="#4k" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-4" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-4" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 5" id="target-5">
       <a-image src="#5k" position="0 0 0" width="1.5" height="1.5"></a-image>
-      <a-image id="got-5" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0"></a-image>
+      <a-image id="got-5" src="#got-image" position="1 4 0" width="1.2" height="1.2" visible="false" opacity="0" look-at="[camera]"></a-image>
     </a-entity>
   </a-scene>
 
@@ -87,6 +90,7 @@
         target.addEventListener("targetFound", () => {
           console.log(`ターゲット認識: ${i}`);
           timeoutID = setTimeout(() => {
+
             // サウンド再生
             sound.currentTime = 0;
             sound.play().catch((e) => {
@@ -114,7 +118,6 @@
 
         target.addEventListener("targetLost", () => {
           clearTimeout(timeoutID);
-          gotImage.setAttribute("visible", false);
           gotImage.removeAttribute("animation__zoom");
           gotImage.removeAttribute("animation__fade");
           gotImage.setAttribute("scale", "0.1 0.1 0.1");
